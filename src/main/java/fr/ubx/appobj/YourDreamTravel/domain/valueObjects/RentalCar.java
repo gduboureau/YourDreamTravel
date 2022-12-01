@@ -4,10 +4,10 @@ public class RentalCar {
     
     private final Adress departure;
     private final Adress destination;
-    private final Price price;        //prix par jour
+    private final int price;        //prix par jour
     private final Car car;
 
-    public RentalCar(Adress departure, Adress destination, Price price, Car car){
+    public RentalCar(Adress departure, Adress destination, int price, Car car){
         this.departure = departure;
         this.destination = destination;
         this.price = price;
@@ -22,8 +22,8 @@ public class RentalCar {
         return destination.getAdress();
     }
 
-    public String getPrice(){
-        return price.getPrice();
+    public int getPrice(){
+        return price;
     }
 
     public String getCar(){

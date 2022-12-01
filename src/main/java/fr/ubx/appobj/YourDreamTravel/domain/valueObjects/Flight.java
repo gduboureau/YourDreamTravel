@@ -1,40 +1,16 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects;
 import java.util.Date;
 
-public class Flight{
+public interface Flight{
 
-    private final String departure;
-    private final String destination;
-    private final Price price;
-    private final Date date;
-    private final NameFlight nameFlight;
+    public String getDeparture();
 
-    public Flight(String departure, String destination, Price price, Date date, NameFlight nameFlight){
-        this.departure = departure;
-        this.destination = destination;
-        this.price = price;
-        this.date = date;
-        this.nameFlight = nameFlight;
-    }
+    public String getDestination();
 
-    public String getDeparture(){
-        return departure;
-    }
+    public int getPrice();
 
-    public String getDestination(){
-        return destination;
-    }
+    public Date getDate();
 
-    public String getPrice(){
-        return price.getPrice();
-    }
-
-    public Date getDate(){
-        return date;
-    }
-
-    public String getNameFlight(){
-        return nameFlight.getNameFlight();
-    }
+    public String getNameFlight();
 
 }
