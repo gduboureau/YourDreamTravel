@@ -1,5 +1,5 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects;
-import java.util.Date;
+
 
 public interface Flight{
 
@@ -9,7 +9,7 @@ public interface Flight{
 
     public int getPrice();
 
-    public Date getDate();
+    public String getDate();
 
     public String getNameFlight();
 

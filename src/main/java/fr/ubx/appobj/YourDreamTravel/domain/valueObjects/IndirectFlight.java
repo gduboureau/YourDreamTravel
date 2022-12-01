@@ -36,16 +36,12 @@ public class IndirectFlight implements Flight{
     }
 
     @Override
-    public Date getDate(){
-        return directFlight.get(0).getDate();
-    }
-
-    public List<Date> getAllDates(){
-        ArrayList<Date> date = new ArrayList<Date>();
+    public String getDate(){
+        String datesFlight = "";
         for (DirectFlight flight: directFlight){
-            date.add(flight.getDate());
+            datesFlight += flight.getDate() + "\n";
         }
-        return date;
+        return datesFlight;
     }
 
     @Override

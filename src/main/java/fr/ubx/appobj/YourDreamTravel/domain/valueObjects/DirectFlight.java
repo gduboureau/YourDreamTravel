@@ -1,5 +1,8 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DirectFlight implements Flight{
@@ -34,8 +37,9 @@ public class DirectFlight implements Flight{
     }
 
     @Override
-    public Date getDate(){
-        return date;
+    public String getDate(){ 
+        DateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm"); //Thu, 01 Dec 2022 13:30
+        return dateFormat.format(date);
     }
 
     @Override
