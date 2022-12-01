@@ -2,7 +2,6 @@ package main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 public class IndirectFlight implements Flight{
 

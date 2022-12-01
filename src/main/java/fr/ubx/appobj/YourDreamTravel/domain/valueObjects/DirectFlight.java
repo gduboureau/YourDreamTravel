@@ -2,7 +2,6 @@ package main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class DirectFlight implements Flight{
