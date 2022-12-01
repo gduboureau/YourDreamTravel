@@ -9,17 +9,19 @@ public class BasicService implements Service{
     private Hotel hotel;
     private RentalCar rentalCar;
     private final UUID id;
+    private final Boolean benefit;
 
-    public BasicService(Hotel hotel, RentalCar rentalCar, UUID id){
+    public BasicService(Hotel hotel, RentalCar rentalCar, UUID id, Boolean benefit){
         this.hotel = hotel;
         this.rentalCar = rentalCar;
         this.id = id;
+        this.benefit = benefit;
     }
 
     @Override
     public int getPrice() {
         int price = 0;
-        if (hotel.getBenefit()){
+        if (benefit){
             price += hotel.getPrice()*1.20;
         }else{
             price += hotel.getPrice();

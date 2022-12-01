@@ -11,6 +11,7 @@ public class DirectFlight implements Flight{
     private final int price;
     private final Date date;
     private final NameFlight nameFlight;
+    
 
     public DirectFlight(String departure, String destination, int price, Date date, NameFlight nameFlight){
         this.departure = departure;

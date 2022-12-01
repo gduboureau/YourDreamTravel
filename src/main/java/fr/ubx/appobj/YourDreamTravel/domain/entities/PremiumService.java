@@ -11,24 +11,29 @@ public class PremiumService implements Service{
     private RentalCar rentalCarA;
     private RentalCar rentalCarB;
     private final UUID id;
+    private final Boolean benefitA;
+    private final Boolean benefitB;
 
-    public PremiumService(Hotel hotelA, Hotel hotelB, RentalCar rentalCarA, RentalCar rentalCarB, UUID id){
+
+    public PremiumService(Hotel hotelA, Hotel hotelB, RentalCar rentalCarA, RentalCar rentalCarB, UUID id, Boolean benefitA,  Boolean benefitB){
         this.hotelA = hotelA;
         this.hotelB = hotelB;
         this.rentalCarA = rentalCarA;
         this.rentalCarB = rentalCarB;
         this.id = id;
+        this.benefitA = benefitA;
+        this.benefitB = benefitB; 
     }
 
     @Override
     public int getPrice() {
         int price = 0;
-        if (hotelA.getBenefit()){
+        if (benefitA){
             price += hotelA.getPrice()*1.20;
         }else{
             price += hotelA.getPrice();
         }
-        if (hotelB.getBenefit()){
+        if (benefitB){
             price += hotelB.getPrice()*1.20;
         }else{
             price += hotelB.getPrice();
