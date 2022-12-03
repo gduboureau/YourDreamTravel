@@ -10,12 +10,14 @@ public class Reservation {
     private Service service;
     private Flight flight;
     private Client client;
+    private Boolean premiumClass;
 
-    public Reservation(UUID id, Service service, Flight flight, Client client){
+    public Reservation(UUID id, Service service, Flight flight, Client client, Boolean premiumClass){
         this.id = id;
         this.service = service;
         this.flight = flight;
         this.client = client;
+        this.premiumClass = premiumClass;
     }
 
     public UUID getID(){
@@ -51,7 +53,11 @@ public class Reservation {
         if (service != null){
             finalPrice += service.getPrice();
         }
-        finalPrice += flight.getPrice();
+        if (premiumClass){
+            finalPrice += flight.getPrice()*1.30;
+        }else{
+            finalPrice += flight.getPrice();
+        }
         return finalPrice;
     }
 }

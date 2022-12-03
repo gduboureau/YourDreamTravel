@@ -55,4 +55,8 @@ public class Client {
     public UUID getId(){
         return id;
     }
+
+    public String getInformations(){
+        return firstName + " " + lastName + " " + gender + " " + birthday + " ";
+    }
 }
