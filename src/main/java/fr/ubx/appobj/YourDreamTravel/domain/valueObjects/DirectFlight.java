@@ -47,4 +47,15 @@ public class DirectFlight implements Flight{
         return nameFlight.getNameFlight();
     }
 
+    @Override
+    public int hashCode(){
+        return nameFlight.getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object){
+        DirectFlight directFlight = (DirectFlight) object;
+        return this.nameFlight.getId().equals(directFlight.nameFlight.getId());
+    }
+
 }

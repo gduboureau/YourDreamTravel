@@ -14,6 +14,10 @@ public class NameFlight {
         this.id = id;
     }
 
+    public UUID getId(){
+        return id;
+    }
+
     public String getNameFlight(){
         return departure + " - " + destination + " / Flight: " + id;
     }

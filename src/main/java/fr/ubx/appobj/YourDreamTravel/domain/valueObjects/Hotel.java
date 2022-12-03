@@ -32,4 +32,14 @@ public class Hotel {
         return id;
     }
     
+    @Override
+    public int hashCode(){
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object){
+        Hotel hotel = (Hotel) object;
+        return this.id.equals(hotel.id);
+    }
 }
