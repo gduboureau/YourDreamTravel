@@ -11,8 +11,8 @@ public class PremiumService implements Service{
     private RentalCar rentalCarA;
     private RentalCar rentalCarB;
     private final UUID id;
-    private final Boolean benefitA;
-    private final Boolean benefitB;
+    private Boolean benefitA;
+    private Boolean benefitB;
 
 
     public PremiumService(Hotel hotelA, Hotel hotelB, RentalCar rentalCarA, RentalCar rentalCarB, UUID id, Boolean benefitA,  Boolean benefitB){

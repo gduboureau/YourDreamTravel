@@ -9,7 +9,7 @@ public class BasicService implements Service{
     private Hotel hotel;
     private RentalCar rentalCar;
     private final UUID id;
-    private final Boolean benefit;
+    private Boolean benefit;
 
     public BasicService(Hotel hotel, RentalCar rentalCar, UUID id, Boolean benefit){
         this.hotel = hotel;
