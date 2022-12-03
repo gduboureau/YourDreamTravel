@@ -25,6 +25,54 @@ public class PremiumService implements Service{
         this.benefitB = benefitB; 
     }
 
+    public Hotel getHotelA(){
+        return hotelA;
+    }
+
+    public Hotel getHotelB(){
+        return hotelB;
+    }
+
+    public RentalCar getRentalCarA(){
+        return rentalCarA;
+    }
+
+    public RentalCar getRentalCarB(){
+        return rentalCarB;
+    }
+
+    public Boolean getBenefitA(){
+        return benefitA;
+    }
+
+    public Boolean getBenefitB(){
+        return benefitB;
+    }
+
+    public void setHotelA(Hotel hotelA){
+        this.hotelA = hotelA;
+    }
+
+    public void setHotelB(Hotel hotelB){
+        this.hotelB = hotelB;
+    }
+
+    public void setRentalCarA(RentalCar rentalCarA){
+        this.rentalCarA = rentalCarA;
+    }
+
+    public void setRentalCarB(RentalCar rentalCarB){
+        this.rentalCarB = rentalCarB;
+    }
+
+    public void setBenefitA(Boolean benefitA){
+        this.benefitA = benefitA;
+    }
+
+    public void setBenefitB(Boolean benefitB){
+        this.benefitB = benefitB;
+    }
+
     @Override
     public int getPrice() {
         int price = 0;

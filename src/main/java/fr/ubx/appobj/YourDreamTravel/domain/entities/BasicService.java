@@ -18,6 +18,30 @@ public class BasicService implements Service{
         this.benefit = benefit;
     }
 
+    public Hotel getHotel(){
+        return hotel;
+    }
+
+    public RentalCar getRentalCar(){
+        return rentalCar;
+    }
+
+    public Boolean getBenefit(){
+        return benefit;
+    }
+
+    public void setHotel(Hotel hotel){
+        this.hotel = hotel;
+    }
+
+    public void setRentalCar(RentalCar rentalCar){
+        this.rentalCar = rentalCar;
+    }
+
+    public void setBenefit(Boolean benefit){
+        this.benefit = benefit;;
+    }
+
     @Override
     public int getPrice() {
         int price = 0;
