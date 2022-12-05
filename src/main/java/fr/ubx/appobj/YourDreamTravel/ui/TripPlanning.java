@@ -140,12 +140,12 @@ public class TripPlanning {
                 flight = ChoseFlight();
                 flightOption = FlightOption(flight);
                 dateDepartureFilght = ChoseFlightDate(flight);
-                // System.out.println("Vous venez d'ajouter à votre panier le vol: " + flight.getNameFlight() + "\n");
             }
             else if (num==2){
                 flight = ChoseFlight();
                 flightOption = FlightOption(flight);
                 dateDepartureFilght = ChoseFlightDate(flight);
+                   
             }
             else{
                 System.out.println("\nChoix inconnu, veuillez réessayer.\n");
@@ -216,6 +216,8 @@ public class TripPlanning {
             System.out.println("Il n'y a rien pour le moment ...\n\n");
         }
     }
+
+
 
     public static String printConsole(String chaine) throws IOException{
         System.out.println(chaine);
