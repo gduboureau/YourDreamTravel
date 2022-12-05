@@ -1,7 +1,6 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DirectFlight implements Flight{
@@ -9,15 +8,15 @@ public class DirectFlight implements Flight{
     private final String departure;
     private final String destination;
     private final int price;
-    private final Date date;
+    private final ArrayList<Date> dates;
     private final NameFlight nameFlight;
     
 
-    public DirectFlight(String departure, String destination, int price, Date date, NameFlight nameFlight){
+    public DirectFlight(String departure, String destination, int price, ArrayList<Date> dates, NameFlight nameFlight){
         this.departure = departure;
         this.destination = destination;
         this.price = price;
-        this.date = date;
+        this.dates = dates;
         this.nameFlight = nameFlight;
     }
 
@@ -37,9 +36,8 @@ public class DirectFlight implements Flight{
     }
 
     @Override
-    public String getDate(){ 
-        DateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm"); //Thu, 01 Dec 2022 13:30
-        return dateFormat.format(date);
+    public ArrayList<Date> getDate(){ 
+        return dates;
     }
 
     @Override

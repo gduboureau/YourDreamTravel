@@ -1,5 +1,8 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.domain.entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects.Flight;
@@ -9,11 +12,13 @@ public class Reservation {
     private final UUID id;
     private Service service;
     private Flight flight;
+    private Date dateDepartureFilght;
     private Boolean premiumClass;
 
-    public Reservation(UUID id, Service service, Flight flight, Boolean premiumClass){
+    public Reservation(UUID id, Service service, Date dateDepartureFilght, Flight flight, Boolean premiumClass){
         this.id = id;
         this.service = service;
+        this.dateDepartureFilght = dateDepartureFilght;
         this.flight = flight;
         this.premiumClass = premiumClass;
     }
@@ -30,12 +35,20 @@ public class Reservation {
         return flight;
     }
 
+    public Date getDateDepartureFilght(){
+        return dateDepartureFilght;
+    }
+
     public void setService(Service service){
         this.service = service;
     }
 
     public void setFlight(Flight flight){
         this.flight = flight;
+    }
+
+    public void setDateDepartureFilght(Date dateDepartureFilght){
+        this.dateDepartureFilght = dateDepartureFilght;
     }
     
     public int getFinalPrice(){
@@ -52,11 +65,12 @@ public class Reservation {
     }
 
     public String getInformations(){
+        DateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm");
         float tmp = 1;
-        String info = ("Vol N°: " + getFlight().getNameFlight());
+        String info = ("Le vol " + getFlight().getNameFlight());
         info += ("\nDépart de " + getFlight().getDeparture());
         info += ("\nA destination de " + getFlight().getDestination());
-        // info += ("\nLe " + getFlight().getDate());
+        info += ("\nLe " + dateFormat.format(dateDepartureFilght));
         if (premiumClass){
             info += ("\nAvec option 1ère classe");
             tmp += 0.30;

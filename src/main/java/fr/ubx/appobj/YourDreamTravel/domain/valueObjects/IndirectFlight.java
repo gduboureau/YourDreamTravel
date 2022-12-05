@@ -1,6 +1,7 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class IndirectFlight implements Flight{
@@ -35,12 +36,11 @@ public class IndirectFlight implements Flight{
     }
 
     @Override
-    public String getDate(){
-        String datesFlight = "";
-        for (DirectFlight flight: directFlight){
-            datesFlight += flight.getDate() + "\n";
-        }
-        return datesFlight;
+    public ArrayList<Date> getDate(){
+        // for (DirectFlight flight: directFlight){
+        //     datesFlight += flight.getDate() + "\n";
+        // }
+        return null;
     }
 
     @Override

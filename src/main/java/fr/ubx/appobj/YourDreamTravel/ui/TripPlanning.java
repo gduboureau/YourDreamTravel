@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 // import java.io.Bufferedtext;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
 // import java.io.InputStreamtext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -85,7 +86,7 @@ public class TripPlanning {
     }
 
     public static void NewReservation() throws IOException, ParseException{
-        System.out.println("Veuilez vous identifier grâce a votre nom pour effectuer une réservation: ");
+        System.out.println("Veuillez vous identifier grâce à votre nom pour effectuer une réservation: ");
         String lastName = printConsole("Nom: ");
         if (agency.getClient(lastName) == null){
             System.out.println("Ce compte client est inexistant, veuillez réessayer ou créer un compte.");
@@ -133,21 +134,24 @@ public class TripPlanning {
             Service service = null;
             Flight flight = null;
             Boolean flightOption = null;
+            Date dateDepartureFilght = null;
             int num = Integer.parseInt(text.readLine());
             if (num==1){
                 flight = ChoseFlight();
-                flightOption = FlightOption();
-                System.out.println("Vous venez d'ajouter à votre panier le vol: " + flight.getNameFlight() + "\n");
+                flightOption = FlightOption(flight);
+                dateDepartureFilght = ChoseFlightDate(flight);
+                // System.out.println("Vous venez d'ajouter à votre panier le vol: " + flight.getNameFlight() + "\n");
             }
             else if (num==2){
                 flight = ChoseFlight();
-                flightOption = FlightOption();
+                flightOption = FlightOption(flight);
+                dateDepartureFilght = ChoseFlightDate(flight);
             }
             else{
                 System.out.println("\nChoix inconnu, veuillez réessayer.\n");
                 ReservationPage(client);
             }
-            agency.makeNewTravel(client, service, flight, flightOption);
+            agency.makeNewTravel(client, service, dateDepartureFilght, flight, flightOption);
             ReservationPage(client);
         }catch(Exception e){ //si le caractere est different d'un int on indique l'erreur a l'utilisateur et on redemande un choix
             System.out.println("\nChoix inconnu, veuillez réessayer.\n");
@@ -167,7 +171,7 @@ public class TripPlanning {
         return flights.get(flightChoice-1);
     }
 
-    public static Boolean FlightOption(){
+    public static Boolean FlightOption(Flight flight){
             System.out.println("Souhaitez vous voyager en 1ère classe ? (vous devrez acquitter d'une majoration de 30%)\n");
             System.out.println("1 - Oui\n");
             System.out.println("2 -Non\n");
@@ -182,21 +186,34 @@ public class TripPlanning {
                 }
                 else{
                     System.out.println("\nChoix inconnu, veuillez réessayer.\n");
-                    FlightOption();
+                    FlightOption(flight);
                 }
             }catch(Exception e){ //si le caractere est different d'un int on indique l'erreur a l'utilisateur et on redemande un choix
                 System.out.println("\nChoix inconnu, veuillez réessayer.\n");
-                FlightOption();
+                FlightOption(flight);
             }
             return premiumClass;
     }
 
+    public static Date ChoseFlightDate(Flight flight) throws NumberFormatException, IOException{
+        DateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm"); //Thu, 01 Dec 2022 13:30
+        System.out.println("Voici la liste des dates disponibles pour votre vol: \n");
+        for (int i = 0; i < flight.getDate().size(); i++){
+            System.out.println("Date "+ (i+1) + ":  " + dateFormat.format(flight.getDate().get(i)));
+        }
+        System.out.println("\n\nVeuillez choisir une date: \n");
+        int dateChoice = Integer.parseInt(text.readLine());
+        System.out.println("Vous venez d'ajouter à votre projet de voyage le vol " + flight.getNameFlight() + ",\nDate de départ le " + dateFormat.format(flight.getDate().get(dateChoice-1)) + "\n");
+        
+        return flight.getDate().get(dateChoice-1);
+    }
+
     public static void DisplayTrip(Client client){
-        System.out.println("Votre panier contient:\n");
         if(datasAgency.getTravel(client.getId()) != null){
-            System.out.println(datasAgency.getTravel(client.getId()).getReservation().getInformations());
+            System.out.println("Voici votre projet de voyage ! :\n");
+            System.out.println(datasAgency.getTravel(client.getId()).getReservation().getInformations() + "\n\n\n");
         }else{
-            System.out.println("Panier vide ...\n\n");
+            System.out.println("Il n'y a rien pour le moment ...\n\n");
         }
     }
 

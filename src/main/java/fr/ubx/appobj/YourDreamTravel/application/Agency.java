@@ -1,5 +1,6 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.application;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -38,8 +39,8 @@ public class Agency {
         return datas.getTravel(id);
     }
 
-    public void makeNewTravel(Client client, Service service, Flight flight, boolean premiumClass){
-        Reservation reservation = new Reservation(UUID.randomUUID(), service, flight, premiumClass);
+    public void makeNewTravel(Client client, Service service, Date dateDepartureFilght, Flight flight, boolean premiumClass){
+        Reservation reservation = new Reservation(UUID.randomUUID(), service, dateDepartureFilght, flight, premiumClass);
         Travel travel = new Travel(client, reservation);
         datas.saveTravel(client, travel);
     }

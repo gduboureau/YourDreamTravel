@@ -1,8 +1,11 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.aggregates.Travel;
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.entities.Client;
@@ -49,10 +52,21 @@ public class DataTripInMemory {
         return hotel;
     }
 
+    public ArrayList<Date> randomDate(int nbrvol){
+        ArrayList<Date> datesvol = new ArrayList<>();
+        long now = new Date().getTime();
+        long maxDate = new Date(now + (TimeUnit.DAYS.toMillis(1)*30*10)).getTime();
+        for (int i=0; i<nbrvol; i++){
+            datesvol.add(new Date(ThreadLocalRandom.current().nextLong(now, maxDate)));
+        }
+        return datesvol;
+    }
+
     public ArrayList<Flight> GetAllFlights(){
         ArrayList<Flight> flights = new ArrayList<>();
+
         //From Paris
-        flights.add(new DirectFlight("Paris", "Bordeaux", 100, null, new NameFlight("Paris", "Bordeaux", UUID.randomUUID())));
+        flights.add(new DirectFlight("Paris", "Bordeaux", 100, randomDate(5), new NameFlight("Paris", "Bordeaux", UUID.randomUUID())));
         flights.add(new DirectFlight("Paris", "Camberra", 500, null, new NameFlight("Paris", "Camberra", UUID.randomUUID())));
         flights.add(new DirectFlight("Paris", "Tokyo", 1100, null, new NameFlight("Paris", "Tokyo", UUID.randomUUID())));
         flights.add(new DirectFlight("Paris", "Delhi", 985, null, new NameFlight("Paris", "Delhi", UUID.randomUUID())));
