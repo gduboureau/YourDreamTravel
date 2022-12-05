@@ -1,5 +1,7 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.domain.entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -56,7 +58,8 @@ public class Client {
         return id;
     }
 
-    public String getInformations(){
-        return firstName + " " + lastName + " " + gender + " " + birthday + " ";
+    public String getInformations(){ 
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); //Thu, 01 Dec 2022 13:30
+        return firstName + " " + lastName + " " + gender + " " + dateFormat.format(birthday);
     }
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.aggregates.Travel;
+import main.java.fr.ubx.appobj.YourDreamTravel.domain.entities.Client;
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects.*;
 
 public class DataTripInMemory {
@@ -15,8 +16,8 @@ public class DataTripInMemory {
         memory = new HashMap<>();
     }
 
-    public void saveTravel(Travel travel){
-        memory.put(travel.getId(), travel);
+    public void saveTravel(Client client, Travel travel){
+        memory.put(client.getId(), travel);
     }
 
     public Travel getTravel(UUID id){
@@ -51,28 +52,28 @@ public class DataTripInMemory {
     public ArrayList<Flight> GetAllFlights(){
         ArrayList<Flight> flights = new ArrayList<>();
         //From Paris
-        flights.add(new DirectFlight("Paris", "Bordeaux", 100, null, new NameFlight("Paris", "Bordeaux", new UUID(2, 2))));
-        flights.add(new DirectFlight("Paris", "Camberra", 500, null, new NameFlight("Paris", "Camberra", new UUID(2, 2))));
-        flights.add(new DirectFlight("Paris", "Tokyo", 1100, null, new NameFlight("Paris", "Tokyo", new UUID(2, 2))));
-        flights.add(new DirectFlight("Paris", "Delhi", 985, null, new NameFlight("Paris", "Delhi", new UUID(2, 2))));
+        flights.add(new DirectFlight("Paris", "Bordeaux", 100, null, new NameFlight("Paris", "Bordeaux", UUID.randomUUID())));
+        flights.add(new DirectFlight("Paris", "Camberra", 500, null, new NameFlight("Paris", "Camberra", UUID.randomUUID())));
+        flights.add(new DirectFlight("Paris", "Tokyo", 1100, null, new NameFlight("Paris", "Tokyo", UUID.randomUUID())));
+        flights.add(new DirectFlight("Paris", "Delhi", 985, null, new NameFlight("Paris", "Delhi", UUID.randomUUID())));
 
         //From Bordeaux
-        flights.add(new DirectFlight("Bordeaux", "Paris", 100, null, new NameFlight("Bordeaux", "Paris", new UUID(2, 2))));
-        flights.add(new DirectFlight("Bordeaux", "Tokyo", 1000, null, new NameFlight("Bordeaux", "Tokyo", new UUID(2, 2))));
-        flights.add(new DirectFlight("Bordeaux", "Delhi", 700, null, new NameFlight("Bordeaux", "Delhi", new UUID(2, 2))));
+        flights.add(new DirectFlight("Bordeaux", "Paris", 100, null, new NameFlight("Bordeaux", "Paris", UUID.randomUUID())));
+        flights.add(new DirectFlight("Bordeaux", "Tokyo", 1000, null, new NameFlight("Bordeaux", "Tokyo", UUID.randomUUID())));
+        flights.add(new DirectFlight("Bordeaux", "Delhi", 700, null, new NameFlight("Bordeaux", "Delhi", UUID.randomUUID())));
         
         //From Camberra
-        flights.add(new DirectFlight("Camberra", "Paris", 450, null, new NameFlight("Camberra", "Paris", new UUID(2, 2))));
-        flights.add(new DirectFlight("Camberra", "Tokyo", 600, null, new NameFlight("Camberra", "Tokyo", new UUID(2, 2))));
+        flights.add(new DirectFlight("Camberra", "Paris", 450, null, new NameFlight("Camberra", "Paris", UUID.randomUUID())));
+        flights.add(new DirectFlight("Camberra", "Tokyo", 600, null, new NameFlight("Camberra", "Tokyo", UUID.randomUUID())));
         
         //From Tokyo
-        flights.add(new DirectFlight("Tokyo", "Bordeaux", 1300, null, new NameFlight("Tokyo", "Bordeaux", new UUID(2, 2))));
-        flights.add(new DirectFlight("Tokyo", "Camberra", 600, null, new NameFlight("Tokyo", "Camberra", new UUID(2, 2))));
+        flights.add(new DirectFlight("Tokyo", "Bordeaux", 1300, null, new NameFlight("Tokyo", "Bordeaux", UUID.randomUUID())));
+        flights.add(new DirectFlight("Tokyo", "Camberra", 600, null, new NameFlight("Tokyo", "Camberra", UUID.randomUUID())));
         
         //From Delhi
-        flights.add(new DirectFlight("Delhi", "Paris", 1000, null, new NameFlight("Delhi", "Paris", new UUID(2, 2))));
-        flights.add(new DirectFlight("Delhi", "Bordeaux", 1240, null, new NameFlight("Delhi", "Bordeaux", new UUID(2, 2))));
-        flights.add(new DirectFlight("Delhi", "Camberra", 365, null, new NameFlight("Delhi", "Camberra", new UUID(2, 2))));
+        flights.add(new DirectFlight("Delhi", "Paris", 1000, null, new NameFlight("Delhi", "Paris", UUID.randomUUID())));
+        flights.add(new DirectFlight("Delhi", "Bordeaux", 1240, null, new NameFlight("Delhi", "Bordeaux", UUID.randomUUID())));
+        flights.add(new DirectFlight("Delhi", "Camberra", 365, null, new NameFlight("Delhi", "Camberra", UUID.randomUUID())));
                 
         return flights;
     }

@@ -19,6 +19,6 @@ public class NameFlight {
     }
 
     public String getNameFlight(){
-        return departure + " - " + destination + " / Flight: " + id;
+        return departure + " - " + destination + " / Flight N°" + id;
     }
 }

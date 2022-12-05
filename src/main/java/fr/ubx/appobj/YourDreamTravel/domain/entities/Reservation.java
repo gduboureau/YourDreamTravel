@@ -9,14 +9,12 @@ public class Reservation {
     private final UUID id;
     private Service service;
     private Flight flight;
-    private Client client;
     private Boolean premiumClass;
 
-    public Reservation(UUID id, Service service, Flight flight, Client client, Boolean premiumClass){
+    public Reservation(UUID id, Service service, Flight flight, Boolean premiumClass){
         this.id = id;
         this.service = service;
         this.flight = flight;
-        this.client = client;
         this.premiumClass = premiumClass;
     }
 
@@ -30,14 +28,6 @@ public class Reservation {
 
     public Flight getFlight(){
         return flight;
-    }
-
-    public Client getClient(){
-        return client;
-    }
-
-    public void setClient(Client client){
-        this.client = client;
     }
 
     public void setService(Service service){
@@ -59,5 +49,19 @@ public class Reservation {
             finalPrice += flight.getPrice();
         }
         return finalPrice;
+    }
+
+    public String getInformations(){
+        float tmp = 1;
+        String info = ("Vol N°: " + getFlight().getNameFlight());
+        info += ("\nDépart de " + getFlight().getDeparture());
+        info += ("\nA destination de " + getFlight().getDestination());
+        // info += ("\nLe " + getFlight().getDate());
+        if (premiumClass){
+            info += ("\nAvec option 1ère classe");
+            tmp += 0.30;
+        }
+        info += ("\nPour un prix total du billet à " + (getFlight().getPrice()*tmp));
+        return info;
     }
 }

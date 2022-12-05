@@ -1,6 +1,6 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.application;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.aggregates.Travel;
@@ -10,20 +10,28 @@ import main.java.fr.ubx.appobj.YourDreamTravel.repository.DataTripInMemory;
 
 public class Agency {
     
-    private ArrayList<Client> clients;
+    private HashMap<String,Client> clients;
     private DataTripInMemory datas;
 
     public Agency(){
-        clients = new ArrayList<>();
+        clients = new HashMap<>();
         datas = new DataTripInMemory();
     }
 
-    public void addClient(Client client){
-        clients.add(client);
+    public DataTripInMemory getDatas(){
+        return datas;
     }
 
-    public ArrayList<Client> getAllClients(){
+    public void addClient(Client client){
+        clients.put(client.getLastName(),client);
+    }
+
+    public HashMap<String,Client> getAllClients(){
         return clients;
+    }
+
+    public Client getClient(String lastName){
+        return clients.get(lastName);
     }
 
     public Travel getTravel(UUID id){
@@ -31,9 +39,9 @@ public class Agency {
     }
 
     public void makeNewTravel(Client client, Service service, Flight flight, boolean premiumClass){
-        Reservation reservation = new Reservation(UUID.randomUUID(), service, flight, client, premiumClass);
+        Reservation reservation = new Reservation(UUID.randomUUID(), service, flight, premiumClass);
         Travel travel = new Travel(client, reservation);
-        datas.saveTravel(travel);
+        datas.saveTravel(client, travel);
     }
 
 }
