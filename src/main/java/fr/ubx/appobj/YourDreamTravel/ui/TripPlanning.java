@@ -8,9 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-import main.java.fr.ubx.appobj.YourDreamTravel.domain.aggregates.*;
+import main.java.fr.ubx.appobj.YourDreamTravel.application.Agency;
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.entities.*;
-import main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects.*;
 import main.java.fr.ubx.appobj.YourDreamTravel.repository.DataTripInMemory;
 
 public class TripPlanning {
@@ -52,7 +51,7 @@ public class TripPlanning {
     }
 
     public static void NewReservation(BufferedReader reader, Agency agency, DataTripInMemory datas) throws IOException{
-        Client client = agency.getClient(printConsole(reader, "Veuilez rentrer le nom du client pour effectuer sa réservation : "));
+        //Client client = agency.getClient(printConsole(reader, "Veuilez rentrer le nom du client pour effectuer sa réservation : "));
         System.out.println("Voici la liste des vols disponibles : \n");
         for (int i = 0; i < datas.GetAllFlights().size(); i++){
             System.out.println(datas.GetAllFlights().get(i).getNameFlight());

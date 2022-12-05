@@ -1,14 +1,26 @@
 package main.java.fr.ubx.appobj.YourDreamTravel.repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
+import main.java.fr.ubx.appobj.YourDreamTravel.domain.aggregates.Travel;
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects.*;
 
 public class DataTripInMemory {
     
+    HashMap<UUID,Travel> memory;
+    
     public DataTripInMemory(){
+        memory = new HashMap<>();
+    }
 
+    public void saveTravel(Travel travel){
+        memory.put(travel.getId(), travel);
+    }
+
+    public Travel getTravel(UUID id){
+        return memory.get(id);
     }
 
     public Hotel GetHotel(String destination){
