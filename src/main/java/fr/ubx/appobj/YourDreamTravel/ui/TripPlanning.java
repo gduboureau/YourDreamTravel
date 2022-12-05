@@ -143,9 +143,9 @@ public class TripPlanning {
             }
             else if (num==2){
                 flight = ChoseFlight();
+                service = chooseService(flight);
                 flightOption = FlightOption(flight);
                 dateDepartureFilght = ChoseFlightDate(flight);
-                   
             }
             else{
                 System.out.println("\nChoix inconnu, veuillez réessayer.\n");
@@ -157,6 +157,82 @@ public class TripPlanning {
             System.out.println("\nChoix inconnu, veuillez réessayer.\n");
             ReservationPage(client);
         }
+    }
+
+    public static Service chooseService(Flight flight){
+        System.out.println("Souhaitez vous un service simple (hôtel et voiture dans un seul lieu) ou un service de haut de gamme (hôtel et voitures dans deux lieux différents) ? :\n");
+        System.out.println("1 - Service simple.\n");
+        System.out.println("2 - Service haut de gamme.\n");
+        Service service = null;
+        try{                                                //on demande a l'utilisateur de choisir choix 1 ou 2
+            int num = Integer.parseInt(text.readLine());
+            Boolean benefit = false;
+            Boolean benefit2 = false;
+            if (num==1){
+                Hotel hotel = datasAgency.GetHotel(flight.getDestination());
+                System.out.println("Très bien, voici l'hôtel disponible pour votre séjour dans la ville de " + flight.getDestination() + " : " + hotel.getName() + "\n");
+                RentalCar rentalCar = chooseCar(hotel);
+                benefit = benefitOption(flight);
+                service = new BasicService(hotel, rentalCar, UUID.randomUUID(), benefit);
+            }
+            else if (num==2){
+                Hotel hotel = datasAgency.GetHotel(flight.getDestination());
+                benefit = benefitOption(flight);
+                System.out.println("Très bien, voici le premier hôtel disponible pour votre séjour dans la ville de " + flight.getDestination() + " : " + hotel.getName() + "\n");
+                Hotel hotel2 = datasAgency.GetSecondHotel(flight.getDestination());
+                benefit2 = benefitOption(flight);
+                System.out.println("Très bien, voici le deuxième hôtel disponible pour votre séjour dans la ville de " + flight.getDestination() + " : " + hotel.getName() + "\n");
+                RentalCar rentalCar = chooseCar(hotel);
+                System.out.println("\nVous aurez cette voiture pour aller de votre premier hotel au second.\n");
+                System.out.println("\nVeuillez en sélectionner une autre pour le deuxième hotel.\n");
+                RentalCar rentalCar2 = chooseCar(hotel2);
+                service = new PremiumService(hotel, hotel2, rentalCar, rentalCar2, UUID.randomUUID(), benefit, benefit2);
+            }
+            else{
+                System.out.println("\nChoix inconnu, veuillez réessayer.\n");
+                chooseService(flight);
+            }
+        }catch(Exception e){ //si le caractere est different d'un int on indique l'erreur a l'utilisateur et on redemande un choix
+            System.out.println("\nChoix inconnu, veuillez réessayer.\n");
+            chooseService(flight);
+        }
+        return service;
+    }
+
+    public static RentalCar chooseCar(Hotel hotel) throws NumberFormatException, IOException{
+        System.out.println("Voici la liste des voitures disponibles: \n");
+        for (int i = 0; i < datasAgency.getCar().size(); i++){
+            System.out.println("Voiture "+ (i+1) + ":    " + datasAgency.getCar().get(i).getBrand());
+        }
+        System.out.println("\n\nVeuillez choisir une voiture: \n");
+        int carChoice = Integer.parseInt(text.readLine());
+        System.out.println("Vous venez de selectionner la voiture " + carChoice + " (" + datasAgency.getCar().get(carChoice-1).getBrand() + ")\n");
+        
+        return datasAgency.newRentalCar(datasAgency.getCar().get(carChoice-1), hotel.getAdress(), null);
+    }
+
+    public static Boolean benefitOption(Flight flight){
+        System.out.println("Souhaitez vous des prestations luxueuses ? (vous devrez acquitter d'une majoration de 20%)\n");
+        System.out.println("1 - Oui\n");
+        System.out.println("2 - Non\n");
+        Boolean luxuriousServices = null;
+        try{                                                //on demande a l'utilisateur de choisir choix 1 ou 2
+            int num = Integer.parseInt(text.readLine());
+            if (num==1){
+                luxuriousServices = true;
+            }
+            else if (num==2){
+                luxuriousServices = false;
+            }
+            else{
+                System.out.println("\nChoix inconnu, veuillez réessayer.\n");
+                chooseService(flight);
+            }
+        }catch(Exception e){ //si le caractere est different d'un int on indique l'erreur a l'utilisateur et on redemande un choix
+            System.out.println("\nChoix inconnu, veuillez réessayer.\n");
+            FlightOption(flight);
+        }
+        return luxuriousServices;
     }
 
     public static Flight ChoseFlight() throws NumberFormatException, IOException{

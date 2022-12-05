@@ -24,8 +24,8 @@ public class Hotel {
         return price;
     }
 
-    public String getAdress(){
-        return adress.getAdress();
+    public Adress getAdress(){
+        return adress;
     }
 
     public UUID getId(){

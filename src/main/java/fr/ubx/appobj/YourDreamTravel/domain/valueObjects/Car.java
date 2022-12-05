@@ -18,6 +18,10 @@ public class Car {
         this.id = id;
     }
 
+    public String getBrand(){
+        return brand;
+    }
+
     public String getCar(){
         return "Brand: " + brand + "\nMotorization: " + motorization + "\nNumber of seats: " + numberSeats + "\nCar's type : " + carType;
     }

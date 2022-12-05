@@ -26,6 +26,36 @@ public class DataTripInMemory {
     public Travel getTravel(UUID id){
         return memory.get(id);
     }
+    
+    public ArrayList<Car> getCar(){
+        ArrayList<Car> cars = new ArrayList<>();
+        cars.add(new Car("Mercedes", "diesel", 5, "SUV", UUID.randomUUID()));
+        cars.add(new Car("Audi", "diesel", 2, "Sportive", UUID.randomUUID()));
+        cars.add(new Car("Chevrolet", "essence", 4, "Cabriolet", UUID.randomUUID()));
+        cars.add(new Car("Renault", "essence", 7, "Monospace", UUID.randomUUID()));
+        cars.add(new Car("BMW", "diesel", 5, "Berline", UUID.randomUUID()));
+        return cars;
+    }
+
+    public RentalCar newRentalCar(Car car, Adress departure, Adress destination){
+        RentalCar rentalCar = null;
+        if (car.getBrand() == "Mercedes"){
+            rentalCar = new RentalCar(departure, destination, 50, car, UUID.randomUUID());
+        }
+        if (car.getBrand() == "Audi"){
+            rentalCar = new RentalCar(departure, destination, 60, car, UUID.randomUUID());
+        }
+        if (car.getBrand() == "Chevrolet"){
+            rentalCar = new RentalCar(departure, destination, 100, car, UUID.randomUUID());
+        }
+        if (car.getBrand() == "Renault"){
+            rentalCar = new RentalCar(departure, destination, 40, car, UUID.randomUUID());
+        }
+        if (car.getBrand() == "BMW"){
+            rentalCar = new RentalCar(departure, destination, 75, car, UUID.randomUUID());
+        }
+        return rentalCar;
+    }
 
     public Hotel GetHotel(String destination){
         Hotel hotel = null;
@@ -48,6 +78,31 @@ public class DataTripInMemory {
         if (destination == "Delhi"){
             Adress adress = new Adress(36, "Ground Floor", "Delhi", "India", UUID.randomUUID());
             hotel = new Hotel("DelhiHotel", 41, adress, UUID.randomUUID());
+        }
+        return hotel;
+    }
+
+    public Hotel GetSecondHotel(String destination){
+        Hotel hotel = null;
+        if (destination == "Paris"){
+            Adress adress = new Adress(41, "Rue des Bourdonnais", "Paris", "France", UUID.randomUUID());
+            hotel = new Hotel("ParisHotel2", 60, adress, UUID.randomUUID());
+        }
+        if (destination == "Bordeaux"){
+            Adress adress = new Adress(24 , "Rue Jean Jacques Rousseau", "Bordeaux", "France", UUID.randomUUID());
+            hotel = new Hotel("BordeauxHotel2", 30, adress, UUID.randomUUID());
+        }
+        if (destination == "Camberra"){
+            Adress adress = new Adress(31, "Wise Close", "Camberra", "Australia", UUID.randomUUID());
+            hotel = new Hotel("CamberraHotel2", 60, adress, UUID.randomUUID());
+        }
+        if (destination == "Tokyo"){
+            Adress adress = new Adress(280-1101, "Yoramachi", "Tokyo", "Japan", UUID.randomUUID());
+            hotel = new Hotel("TokyoHotel2", 25, adress, UUID.randomUUID());
+        }
+        if (destination == "Delhi"){
+            Adress adress = new Adress(10, "RK Puram, Sector 1", "Delhi", "India", UUID.randomUUID());
+            hotel = new Hotel("DelhiHotel2", 15, adress, UUID.randomUUID());
         }
         return hotel;
     }
