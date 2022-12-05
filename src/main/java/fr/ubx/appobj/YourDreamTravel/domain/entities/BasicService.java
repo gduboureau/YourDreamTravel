@@ -42,6 +42,10 @@ public class BasicService implements Service{
         this.benefit = benefit;;
     }
 
+    public int getHotelPriceWithBenefit(){
+        return (int) (hotel.getPrice()*1.20);
+    }
+
     @Override
     public int getPrice() {
         int price = 0;

@@ -66,6 +66,38 @@ public class Reservation {
         return finalPrice;
     }
 
+    public String getPriceInformation(){
+        String info = "";
+        if (premiumClass){
+            info += "Prix du billet d'avion " + flight.getPrice()*1.30 + "€";
+            info += " (dont  " + flight.getPrice()*0.30 + "€" + " de frais liés à la classe premium.)";
+        }else{
+            info += "Prix du billet d'avion " + flight.getPrice() + "€";
+        }
+        if (service != null){
+            info += ("\nVotre voyage comprend également des services :");
+            if (service instanceof BasicService){
+                BasicService basicService = ((BasicService) service);
+                RentalCar rentalCar = ((BasicService) service).getRentalCar();
+                info += "\nPrix de l'hôtel : " + basicService.getHotelPriceWithBenefit() + "€";
+                info += "\nPrix de la voiture de location : " + rentalCar.getPrice() + "€";
+            }
+            if (service instanceof PremiumService){
+                Hotel hotelA = ((PremiumService) service).getHotelA();
+                Hotel hotelB = ((PremiumService) service).getHotelB();
+                PremiumService basicService = ((PremiumService) service);
+                RentalCar rentalCarA = ((PremiumService) service).getRentalCarA();
+                RentalCar rentalCarB = ((PremiumService) service).getRentalCarB();
+                info += "\nPrix du premier hôtel : " + basicService.getHotelPriceWithBenefit(hotelA) + "€";
+                info += "\nPrix du deuxième hôtel : " + basicService.getHotelPriceWithBenefit(hotelB) + "€";
+                info += "\nPrix de la première voiture de location : " + rentalCarA.getPrice() + "€";
+                info += "\nPrix de la deuxième voiture de location : " + rentalCarB.getPrice() + "€";
+            }
+        }
+        info += "\nPrix total : " + getFinalPrice() + "€";
+        return info;
+    }
+
     public String getInformations(){
         DateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm");
         float tmp = 1;

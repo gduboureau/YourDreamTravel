@@ -102,7 +102,8 @@ public class TripPlanning {
         System.out.println("Que souhaitez vous faire ?:\n");
         System.out.println("1 - Créer un nouveau projet de voyage.\n");
         System.out.println("2 - Consulter mon projet de voyage.\n");
-        System.out.println("3 - Déconnexion du compte client.\n");
+        System.out.println("3 - Consulter le prix de mon projet de voyage.\n");
+        System.out.println("4 - Déconnexion du compte client.\n");
         int num = Integer.parseInt(text.readLine());
         try{                                                //on demande a l'utilisateur de choisir choix 1 ou 2
             if (num==1){
@@ -112,7 +113,11 @@ public class TripPlanning {
                 DisplayTrip(client);
                 ReservationPage(client);
             }
-            else if (num==3){
+            else if (num == 3){
+                DisplayPriceDetail(client);
+                ReservationPage(client);
+            }
+            else if (num==4){
                 client = null;
                 homePage();
             }
@@ -250,7 +255,7 @@ public class TripPlanning {
     public static Boolean FlightOption(Flight flight){
             System.out.println("Souhaitez vous voyager en 1ère classe ? (vous devrez acquitter d'une majoration de 30%)\n");
             System.out.println("1 - Oui\n");
-            System.out.println("2 -Non\n");
+            System.out.println("2 - Non\n");
             Boolean premiumClass=null;
             try{                                                //on demande a l'utilisateur de choisir choix 1 ou 2
                 int num = Integer.parseInt(text.readLine());
@@ -293,7 +298,14 @@ public class TripPlanning {
         }
     }
 
-
+    public static void DisplayPriceDetail(Client client){
+        if(datasAgency.getTravel(client.getId()) != null){
+            System.out.println("Voici le detail du prix de votre voyage :\n");
+            System.out.println(datasAgency.getTravel(client.getId()).getReservation().getPriceInformation() + "\n\n\n");
+        }else{
+            System.out.println("Il n'y a rien pour le moment ...\n\n");
+        }
+    }
 
     public static String printConsole(String chaine) throws IOException{
         System.out.println(chaine);

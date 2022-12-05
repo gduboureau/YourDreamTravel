@@ -95,6 +95,10 @@ public class PremiumService implements Service{
         return price;
     }
 
+    public int getHotelPriceWithBenefit(Hotel hotel){
+        return (int) (hotel.getPrice()*1.20);
+    }
+
     @Override
     public UUID getId() {
         return id;
