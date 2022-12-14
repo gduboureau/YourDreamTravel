@@ -22,6 +22,7 @@ public class TripPlanning {
     public static Agency agency = new Agency(); //on creer une nouvelle agence
     public static DataTripInMemory datasAgency = agency.getDatas();
     public static ArrayList<Flight> flights = datasAgency.GetAllFlights(); //on initialise le tableau des vols en recuperant les données depuis DataTripInMemory 
+    public static ArrayList<Flight> indirectFlights = datasAgency.getAllIndirectFlights();
     public static BufferedReader text = new BufferedReader(new InputStreamReader(System.in));
     
 
@@ -184,6 +185,7 @@ public class TripPlanning {
                 Hotel hotel = datasAgency.GetHotel(flight.getDestination());
                 benefit = benefitOption(flight);
                 System.out.println("Très bien, voici le premier hôtel disponible pour votre séjour dans la ville de " + flight.getDestination() + " : " + hotel.getName() + "\n");
+                System.out.println("Vous devez maintenant choisir pour le deuxième hotel : \n");
                 Hotel hotel2 = datasAgency.GetSecondHotel(flight.getDestination());
                 benefit2 = benefitOption(flight);
                 System.out.println("Très bien, voici le deuxième hôtel disponible pour votre séjour dans la ville de " + flight.getDestination() + " : " + hotel.getName() + "\n");
@@ -242,14 +244,26 @@ public class TripPlanning {
 
     public static Flight ChoseFlight() throws NumberFormatException, IOException{
         System.out.println("Voici la liste des vols disponibles: \n");
+        int cpt = 0;
         for (int i = 0; i < flights.size(); i++){
-            System.out.println("Vol "+ (i+1) + ":    " + flights.get(i).getNameFlight());
+            System.out.println("Vol direct "+ (i+1) + ":    " + flights.get(i).getNameFlight());
+            cpt ++;
+        }
+        for (int i = cpt; i < indirectFlights.size() + cpt; i++){
+            System.out.println("Vol indirect "+ (i+1) + ":    " + indirectFlights.get(i-cpt).getNameFlight());
         }
         System.out.println("\n\nVeuillez choisir un vol: \n");
         int flightChoice = Integer.parseInt(text.readLine());
-        System.out.println("Vous venez de selectionner le vol " + flightChoice + " (" + flights.get(flightChoice-1).getNameFlight() + ")\n");
+        if (flightChoice <= flights.size()){
+            System.out.println("Vous venez de selectionner le vol " + flightChoice + " (" + flights.get(flightChoice-1).getNameFlight() + ")\n");
         
-        return flights.get(flightChoice-1);
+            return flights.get(flightChoice-1);
+        }else{
+            System.out.println("Vous venez de selectionner le vol " + flightChoice + " (" + indirectFlights.get(flightChoice-1-cpt).getNameFlight() + ")\n");
+        
+            return indirectFlights.get(flightChoice-1-cpt);
+        }
+        
     }
 
     public static Boolean FlightOption(Flight flight){

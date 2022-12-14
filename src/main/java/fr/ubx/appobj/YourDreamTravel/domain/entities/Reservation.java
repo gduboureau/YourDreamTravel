@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects.Flight;
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects.Hotel;
+import main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects.IndirectFlight;
 import main.java.fr.ubx.appobj.YourDreamTravel.domain.valueObjects.RentalCar;
 
 public class Reservation {
@@ -16,13 +17,15 @@ public class Reservation {
     private Flight flight;
     private Date dateDepartureFilght;
     private Boolean premiumClass;
+    private Boolean reduction;
 
-    public Reservation(UUID id, Service service, Date dateDepartureFilght, Flight flight, Boolean premiumClass){
+    public Reservation(UUID id, Service service, Date dateDepartureFilght, Flight flight, Boolean premiumClass, Boolean reduction){
         this.id = id;
         this.service = service;
         this.dateDepartureFilght = dateDepartureFilght;
         this.flight = flight;
         this.premiumClass = premiumClass;
+        this.reduction = reduction;
     }
 
     public UUID getID(){
@@ -55,13 +58,17 @@ public class Reservation {
     
     public int getFinalPrice(){
         int finalPrice = 0;
+        int baseFlightPrice = flight.getPrice();
         if (service != null){
             finalPrice += service.getPrice();
         }
+        if (reduction){
+            baseFlightPrice = (int) (baseFlightPrice*0.80);
+        }
         if (premiumClass){
-            finalPrice += flight.getPrice()*1.30;
+            finalPrice += baseFlightPrice*1.30;
         }else{
-            finalPrice += flight.getPrice();
+            finalPrice += baseFlightPrice;
         }
         return finalPrice;
     }
@@ -103,6 +110,9 @@ public class Reservation {
         float tmp = 1;
         String info = ("Le vol " + getFlight().getNameFlight());
         info += ("\nDépart de " + getFlight().getDeparture());
+        if (getFlight() instanceof IndirectFlight){
+            info += "\nAvec escale de 1h à " + ((IndirectFlight) getFlight()).getEscaleWithIndex(1);
+        }
         info += ("\nA destination de " + getFlight().getDestination());
         info += ("\nLe " + dateFormat.format(dateDepartureFilght));
         if (premiumClass){

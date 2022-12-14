@@ -146,4 +146,34 @@ public class DataTripInMemory {
                 
         return flights;
     }
+
+    public ArrayList<Flight> getAllIndirectFlights(){
+        ArrayList<Flight> flights = new ArrayList<>();
+
+        //bordeaux paris camberra
+        Flight parisBordeaux = new DirectFlight("Bordeaux", "Paris", 100, randomDate(5), new NameFlight("Bordeaux", "Paris", UUID.randomUUID()));
+        Flight bordeauxCamberra = new DirectFlight("Paris", "Camberra", 500, randomDate(5), new NameFlight("Paris", "Camberra", UUID.randomUUID()));
+        IndirectFlight parisBordeauxCamberra = new IndirectFlight();
+        parisBordeauxCamberra.AddFlight((DirectFlight)parisBordeaux);
+        parisBordeauxCamberra.AddFlight((DirectFlight)bordeauxCamberra);
+        flights.add(parisBordeauxCamberra);
+
+        //paris bordeaux tokyo
+        Flight parisBordeaux2 = new  DirectFlight("Paris", "Bordeaux", 100, randomDate(5), new NameFlight("Paris", "Bordeaux", UUID.randomUUID()));
+        Flight bordeauxTokyo = new DirectFlight("Bordeaux", "Tokyo", 1000, randomDate(5), new NameFlight("Bordeaux", "Tokyo", UUID.randomUUID()));
+        IndirectFlight parisBordeauxTokyo = new IndirectFlight();
+        parisBordeauxTokyo.AddFlight((DirectFlight)parisBordeaux2);
+        parisBordeauxTokyo.AddFlight((DirectFlight)bordeauxTokyo);
+        flights.add(parisBordeauxTokyo);
+
+        //delhi bordeaux tokyo
+        Flight delhiBordeaux = new DirectFlight("Delhi", "Bordeaux", 1240, randomDate(5), new NameFlight("Delhi", "Bordeaux", UUID.randomUUID()));
+        Flight bordeauxTokyo2 = new DirectFlight("Bordeaux", "Tokyo", 1000, randomDate(5), new NameFlight("Bordeaux", "Tokyo", UUID.randomUUID()));
+        IndirectFlight delhiBordeauxTokyo = new IndirectFlight();
+        delhiBordeauxTokyo.AddFlight((DirectFlight)delhiBordeaux);
+        delhiBordeauxTokyo.AddFlight((DirectFlight)bordeauxTokyo2);
+        flights.add(delhiBordeauxTokyo);
+
+        return flights;
+    }
 }

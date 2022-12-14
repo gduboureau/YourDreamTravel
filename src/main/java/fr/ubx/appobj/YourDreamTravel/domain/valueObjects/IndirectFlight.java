@@ -16,6 +16,10 @@ public class IndirectFlight implements Flight{
         directFlight.add(flight);
     }
 
+    public String getEscaleWithIndex(int i){
+        return directFlight.get(i).getDeparture();
+    }
+
     @Override
     public String getDeparture(){
         return directFlight.get(0).getDeparture();
@@ -37,10 +41,7 @@ public class IndirectFlight implements Flight{
 
     @Override
     public ArrayList<Date> getDate(){
-        // for (DirectFlight flight: directFlight){
-        //     datesFlight += flight.getDate() + "\n";
-        // }
-        return null;
+        return directFlight.get(0).getDate();
     }
 
     @Override
