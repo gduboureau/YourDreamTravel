@@ -34,6 +34,7 @@ public class TripPlanning {
         System.out.println("\nQue souhaitez-vous faire: \n");
         System.out.println("1 - Créer un compte client.\n");
         System.out.println("2 - Réserver un voyage en tant que client.\n");
+        System.out.println("3 - Fermer l'agence.\n");
         try{                                                //on demande a l'utilisateur de choisir choix 1 ou 2
             int num = Integer.parseInt(text.readLine());
             if (num==1){
@@ -41,6 +42,10 @@ public class TripPlanning {
             }
             else if (num==2){
                 NewReservation();
+            }
+            else if (num==3){
+                System.out.println("Fermeture de l'agence.");
+                return;
             }
             else{
                 System.out.println("\nChoix inconnu, veuillez réessayer.\n");
